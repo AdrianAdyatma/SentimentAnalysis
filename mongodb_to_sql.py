@@ -18,19 +18,21 @@ def db_create(dbname):
     dbCursor = mydb.cursor()
     dbCursor.execute("SHOW DATABASES")
     # Check if database already exists
-    dbExist = False
+    # dbExist = False
     for x in dbCursor:
         print(x)
-        if x == "('"+dbname+",)":
-            dbExist = True
+        # f = open("database_list.txt", "w")
+        # f.write(x)
+        # if x == "('" + dbname + ",)":
+        #     dbExist = True
 
-    if not dbExist:
-        try:
-            dbCursor.execute("CREATE DATABASE " + dbname)
-        except:
-            print("Error creating database")
-        else:
-            print("Database created")
+    # if not dbExist:
+    #     try:
+    #         dbCursor.execute("CREATE DATABASE " + dbname)
+    #     except:
+    #         print("Error creating database")
+    #     else:
+    #         print("Database created")
 
 
 # Check if table already exists
@@ -59,9 +61,9 @@ def table_create(dbname, tablename):
         else:
             print("Table created")
 
+
 dbname = "dbmantap"
 tablename = "tabelmantap"
 
-
 db_create(dbname)
-table_create(dbname,tablename)
+# table_create(dbname, tablename)
