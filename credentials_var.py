@@ -2,7 +2,7 @@ import pymongo
 import tweepy
 
 
-# Database identifier & connection
+# MongoDB Database identifier & connection
 client = pymongo.MongoClient('localhost', 27017)
 db = client.RawTweetStreamDB
 coll = db.tweets

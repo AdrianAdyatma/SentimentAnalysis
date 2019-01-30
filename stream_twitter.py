@@ -23,10 +23,10 @@ class CustomStreamListener(tweepy.StreamListener):
         return True
 
 
-TweetStream = tweepy.streaming.Stream(cred.auth, CustomStreamListener(cred.api))
+tweetStream = tweepy.streaming.Stream(cred.auth, CustomStreamListener(cred.api))
 
 # The list of keywords for filtering tweets
-keyword_list = ['RT']
+keywordList = ['RT']
 
 # Start streaming tweets
-TweetStream.filter(track=keyword_list)
+tweetStream.filter(track=keywordList)
