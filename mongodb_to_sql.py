@@ -1,5 +1,6 @@
-import credentials_var as cred
 import mysql.connector
+
+import credentials_var as cred
 
 
 # cursor = cred.coll.find({})
@@ -7,35 +8,33 @@ import mysql.connector
 #     print(document)
 
 
-# MySQL Database identifier & connection
-def db_check(self, dbname):
-    self.dbname = dbname
+def db_create(dbname):
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
         passwd=""
     )
+
     dbCursor = mydb.cursor()
-
+    dbCursor.execute("SHOW DATABASES")
     # Check if database already exists
-    dbNotExist = True
+    dbExist = False
     for x in dbCursor:
-        if x != dbname:
-            dbNotExist = True
+        print(x)
+        if x == "('"+dbname+",)":
+            dbExist = True
 
-    if dbNotExist:
+    if not dbExist:
         try:
             dbCursor.execute("CREATE DATABASE " + dbname)
-            print("Database created")
         except:
-            print("Database exists")
+            print("Error creating database")
+        else:
+            print("Database created")
 
 
 # Check if table already exists
-def table_check(self, dbname, tablename):
-
-    self.dbname = dbname
-    self.tableName = tablename
+def table_create(dbname, tablename):
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -46,8 +45,23 @@ def table_check(self, dbname, tablename):
     tableCursor = mydb.cursor()
 
     tableNotExist = True
-
-    tableCursor.execute("SHOW TABLES")
-
     for x in tableCursor:
-        print(x)
+        if x == tablename:
+            tableNotExist = False
+        else:
+            tableNotExist = True
+
+    if tableNotExist == True:
+        try:
+            tableCursor.execute("CREATE TABLE " + tablename + " (name VARCHAR(255), address VARCHAR(255))")
+        except:
+            print("Error creating table")
+        else:
+            print("Table created")
+
+dbname = "dbmantap"
+tablename = "tabelmantap"
+
+
+db_create(dbname)
+table_create(dbname,tablename)
