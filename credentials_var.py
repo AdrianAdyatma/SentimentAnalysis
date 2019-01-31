@@ -1,12 +1,25 @@
 import pymongo
 import tweepy
+import mysql.connector
 
+
+# MySQL Database identifier & connection
+sql_db_name = "dbmantap"
+sqlDb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="",
+    database=sql_db_name
+)
+sqlCursor = sqlDb.cursor()
 
 # MongoDB Database identifier & connection
 client = pymongo.MongoClient('localhost', 27017)
-db = client.TweetSentimenyAnalyzer
-raw_collection = db.tweets
-tokens_collection = db.tokens
+mongoDb = client.TweetSentimentAnalyzer
+raw_tweets = mongoDb.tweets
+raw_findAll = raw_tweets.find()
+tokens = mongoDb.tokens
+tokens_findAll = tokens.find()
 
 # User credentials to access Twitter API
 ACCESS_TOKEN = "94752564-BvP4ZNJawmbcBbZfl9V9fVxCMqBEw3C3XfspEZFbZ"

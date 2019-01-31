@@ -1,29 +1,19 @@
-import mysql.connector
 
 import credentials_var as cred
 
-sqldb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="",
-    database="dbmantap"
-)
-
-sqlCursor = sqldb.cursor()
-
-mongoCursor = cred.raw_collection.find()
-
-list_results = list(mongoCursor)
-for raw_data in list_results:
-    # print(raw_data["user"]["screen_name"])
+list_results = list(cred.raw_findAll)
+for element in list_results:
+    # print(element["user"]["screen_name"])
 
     try:
         sql = "INSERT INTO tabelmantap (id_str, text) VALUES (%s, %s)"
-        val = (raw_data["id_str"], raw_data["text"])
-        sqlCursor.execute(sql, val)
+        val = (element["id_str"], element["text"])
+        # val = (element["id_str"], element["retweeted_status.extended_tweet.full_text"])
+        cred.sqlCursor.execute(sql, val)
 
-        sqldb.commit()
+        # Commit all changes to sql
+        cred.sqlDb.commit()
     except:
-        print("error inputing data to table sql", raw_data["id_str"])
+        print(element["id_str"], "error export data to sql")
     else:
-        print(sqlCursor.rowcount, "record inserted.")
+        print(element["id_str"], "export to sql success.")

@@ -7,12 +7,12 @@ class CustomStreamListener(tweepy.StreamListener):
     def __init__(self, api):
         self.api = api
         super(tweepy.StreamListener, self).__init__()
-        self.db = cred.db
+        self.db = cred.mongoDb
 
     def on_data(self, tweet):
         full_data = json.loads(tweet)
         print(full_data)
-        cred.raw_collection.insert_one(full_data)
+        cred.raw_tweets.insert_one(full_data)
 
     def on_error(self, status_code):
         print(status_code)
@@ -27,7 +27,7 @@ class CustomStreamListener(tweepy.StreamListener):
 tweetStream = tweepy.Stream(cred.auth, CustomStreamListener(cred.api))
 
 # The list of keywords for filtering tweets
-keywordList = ['trump']
+keywordList = ['indonesia']
 
 # Start streaming tweets
 tweetStream.filter(track=keywordList)

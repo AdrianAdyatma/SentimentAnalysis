@@ -7,32 +7,17 @@ import credentials_var as cred
 # for document in cursor:
 #     print(document)
 
-
-def db_create(dbname):
-    mydb = mysql.connector.connect(
+# Create database if not exists
+def sql_checkCreate():
+    # MySQL for checking database existence
+    sqlDbCheck = mysql.connector.connect(
         host="localhost",
         user="root",
         passwd=""
     )
-
-    dbCursor = mydb.cursor()
-    dbCursor.execute("SHOW DATABASES")
-    # Check if database already exists
-    # dbExist = False
-    for x in dbCursor:
-        print(x)
-        # f = open("database_list.txt", "w")
-        # f.write(x)
-        # if x == "('" + dbname + ",)":
-        #     dbExist = True
-
-    # if not dbExist:
-    #     try:
-    #         dbCursor.execute("CREATE DATABASE " + dbname)
-    #     except:
-    #         print("Error creating database")
-    #     else:
-    #         print("Database created")
+    sqlCheckCursor = sqlDbCheck.cursor()
+    sql = "CREATE DATABASE IF NOT EXISTS ", cred.sql_db_name;
+    sqlCheckCursor.execute(sql)
 
 
 # Check if table already exists
@@ -61,9 +46,3 @@ def table_create(dbname, tablename):
         else:
             print("Table created")
 
-
-dbname = "dbmantap"
-tablename = "tabelmantap"
-
-db_create(dbname)
-# table_create(dbname, tablename)
