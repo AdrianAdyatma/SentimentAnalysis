@@ -27,7 +27,7 @@ class CustomStreamListener(tweepy.StreamListener):
 tweetStream = tweepy.Stream(cred.auth, CustomStreamListener(cred.api))
 
 # The list of keywords for filtering tweets
-keywordList = ['indonesia']
+keywordList = ['sandiaga']
 
 # Start streaming tweets
 tweetStream.filter(track=keywordList)

@@ -15,34 +15,34 @@ def sql_checkCreate():
         user="root",
         passwd=""
     )
-    sqlCheckCursor = sqlDbCheck.cursor()
-    sql = "CREATE DATABASE IF NOT EXISTS ", cred.sql_db_name;
-    sqlCheckCursor.execute(sql)
+    sqlDbCheck.cursor().execute("CREATE DATABASE IF NOT EXISTS %s", cred.sql_db_name)
 
 
 # Check if table already exists
-def table_create(dbname, tablename):
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="",
-        database=dbname
-    )
+# def table_create(dbname, tablename):
+#     mydb = mysql.connector.connect(
+#         host="localhost",
+#         user="root",
+#         passwd="",
+#         database=dbname
+#     )
+#
+#     tableCursor = mydb.cursor()
+#
+#     tableNotExist = True
+#     for x in tableCursor:
+#         if x == tablename:
+#             tableNotExist = False
+#         else:
+#             tableNotExist = True
+#
+#     if tableNotExist == True:
+#         try:
+#             tableCursor.execute("CREATE TABLE " + tablename + " (name VARCHAR(255), address VARCHAR(255))")
+#         except:
+#             print("Error creating table")
+#         else:
+#             print("Table created")
 
-    tableCursor = mydb.cursor()
 
-    tableNotExist = True
-    for x in tableCursor:
-        if x == tablename:
-            tableNotExist = False
-        else:
-            tableNotExist = True
-
-    if tableNotExist == True:
-        try:
-            tableCursor.execute("CREATE TABLE " + tablename + " (name VARCHAR(255), address VARCHAR(255))")
-        except:
-            print("Error creating table")
-        else:
-            print("Table created")
-
+sql_checkCreate()
