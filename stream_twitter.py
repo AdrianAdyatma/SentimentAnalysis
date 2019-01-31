@@ -3,12 +3,6 @@ import tweepy
 
 import credentials_var as cred
 
-
-# def isRetweet(tweet):
-#     if tweet.retweeted_status:
-#         return True
-
-
 class CustomStreamListener(tweepy.StreamListener):
     def __init__(self, api):
         self.api = api
@@ -18,7 +12,7 @@ class CustomStreamListener(tweepy.StreamListener):
     def on_data(self, tweet):
         full_data = json.loads(tweet)
         print(full_data)
-        cred.coll.insert_one(full_data)
+        cred.raw_collection.insert_one(full_data)
 
     def on_error(self, status_code):
         print(status_code)

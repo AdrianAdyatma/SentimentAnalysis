@@ -4,8 +4,9 @@ import tweepy
 
 # MongoDB Database identifier & connection
 client = pymongo.MongoClient('localhost', 27017)
-db = client.RawTweetStreamDB
-coll = db.tweets
+db = client.TweetSentimenyAnalyzer
+raw_collection = db.tweets
+tokens_collection = db.tokens
 
 # User credentials to access Twitter API
 ACCESS_TOKEN = "94752564-BvP4ZNJawmbcBbZfl9V9fVxCMqBEw3C3XfspEZFbZ"
