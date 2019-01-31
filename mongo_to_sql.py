@@ -11,19 +11,19 @@ sqldb = mysql.connector.connect(
 
 sqlCursor = sqldb.cursor()
 
-mongoCursor = cred.coll.find({}, {"_id": 0, "id_str": 1, "text": 1})
-for raw_data in mongoCursor:
-    # print(raw_data["text"])
+mongoCursor = cred.coll.find()
 
-    # class FilteredData:
-    #     def __init__(self, id_str, text):
-    #         self.id_str = id_str
-    #         self.text = text
+list_results = list(mongoCursor)
+for raw_data in list_results:
+    print(raw_data["user"]["screen_name"])
 
-    sql = "INSERT INTO tabelmantap (id, text) VALUES (%s, %s)"
-    val = (raw_data["id_str"], raw_data["text"])
-    sqlCursor.execute(sql, val)
-
-    sqldb.commit()
-
-    print(sqlCursor.rowcount, "record inserted.")
+    # try:
+    #     sql = "INSERT INTO tabelmantap (id_str, text) VALUES (%s, %s)"
+    #     val = (raw_data["id_str"], raw_data["text"])
+    #     sqlCursor.execute(sql, val)
+    #
+    #     sqldb.commit()
+    # except:
+    #     print("error inputing data to table sql", raw_data["id_str"])
+    # else:
+    #     print(sqlCursor.rowcount, "record inserted.")
