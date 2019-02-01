@@ -2,6 +2,8 @@ from nltk.tokenize import TweetTokenizer
 
 import credentials_var as cred
 
+count = 0
+
 # Read documents in raw tweets collection then export to mongodb
 for element in cred.raw_findAll:
     message = element["text"]
@@ -16,7 +18,10 @@ for element in cred.raw_findAll:
 
         # Export dictOfTokens to mongodb
         cred.tokens.insert_one(dictOfTokens)
-        print(element["id_str"], "Export success")
+        print(element["id_str"], "export token success")
+        count += 1
 
     else:
-        print(element["id_str"], "Already exported")
+        print(element["id_str"], "export token error")
+
+print(count, "token(s) exported")

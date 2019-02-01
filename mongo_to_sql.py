@@ -1,6 +1,8 @@
 
 import credentials_var as cred
 
+count = 0
+
 list_results = list(cred.raw_findAll)
 for element in list_results:
     # print(element["user"]["screen_name"])
@@ -14,6 +16,9 @@ for element in list_results:
         # Commit all changes to sql
         cred.sqlDb.commit()
     except:
-        print(element["id_str"], "error export data to sql")
+        print(element["id_str"], "export to sql error")
     else:
-        print(element["id_str"], "export to sql success.")
+        print(element["id_str"], "export to sql success")
+        count += 1
+
+print(count, "data exported to sql")

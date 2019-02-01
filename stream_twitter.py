@@ -3,7 +3,10 @@ import tweepy
 
 import credentials_var as cred
 
+
 class CustomStreamListener(tweepy.StreamListener):
+    count = 0
+
     def __init__(self, api):
         self.api = api
         super(tweepy.StreamListener, self).__init__()
@@ -27,7 +30,7 @@ class CustomStreamListener(tweepy.StreamListener):
 tweetStream = tweepy.Stream(cred.auth, CustomStreamListener(cred.api))
 
 # The list of keywords for filtering tweets
-keywordList = ['sandiaga']
+keywordList = ['pagi']
 
 # Start streaming tweets
 tweetStream.filter(track=keywordList)
